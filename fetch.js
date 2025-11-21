@@ -5,7 +5,7 @@ window.onload = function () {
         if (!val.trim()) return;
 
         window.location.href =
-            'https://rrrorg9iri.execute-api.eu-west-1.amazonaws.com/default/aya-function?name='
+            'https://rrrorg9iri.execute-api.eu-west-1.amazonaws.com/default/aya-function'
             + encodeURIComponent(val);
 
     }, false);
