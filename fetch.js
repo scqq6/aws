@@ -1,20 +1,15 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("button");
-    const output = document.querySelector(".content");
+ndow.onload = function() {
+ document.getElementById('button').addEventListener('click', function () {
+ let val = document.querySelector('input[id="myvalue"]').value;
+ console.log(val);
+ fetch('https://<<YOUR URL>>?key1='+val)
+ .then((response) => {
+ return response.text();
+ })
+ .then((myContent) => {
 
-    button.addEventListener("click", async () => {
-        const value = document.getElementById("myvalue").value;
+document.querySelector('.content').innerHTML = myContent;
+ });
 
-        // Your Lambda URL
-        const apiUrl = "https://rrrorg9iri.execute-api.eu-west-1.amazonaws.com/default/aya-function" + encodeURIComponent(value);
-
-        try {
-            const response = await fetch(apiUrl);
-            const text = await response.text();
-
-            output.textContent = "Response: " + text;
-        } catch (err) {
-            output.textContent = "Error: " + err;
-        }
-    });
-});
+ }, false);
+}
