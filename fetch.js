@@ -1,4 +1,4 @@
-ndow.onload = function() {
+window.onload = function() {
  document.getElementById('button').addEventListener('click', function () {
  let val = document.querySelector('input[id="myvalue"]').value;
  console.log(val);
