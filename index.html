@@ -3,48 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DynamoDB User Form</title>
+    <title>Add User to DynamoDB</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 30px;
-            background: #f7f7f7;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            width: 320px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         input, button {
+            width: 100%;
             padding: 10px;
-            margin: 8px 0;
-            width: 280px;
             font-size: 16px;
+            margin: 10px 0;
         }
         button {
-            cursor: pointer;
-            background-color: #007bff;
+            background: #007bff;
             border: none;
             color: white;
+            cursor: pointer;
             border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
         }
         #message {
             margin-top: 15px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
         }
     </style>
 </head>
-
 <body>
 
-    <h2>Add User to DynamoDB</h2>
+    <div class="container">
+        <h2>Add User</h2>
 
-    <label>Name:</label><br>
-    <input type="text" id="name" placeholder="Enter your name"><br>
+        <input type="text" id="name" placeholder="Enter name">
+        <input type="email" id="email" placeholder="Enter email">
 
-    <label>Email:</label><br>
-    <input type="email" id="email" placeholder="Enter your email"><br>
+        <button onclick="sendData()">Submit</button>
 
-    <button onclick="sendData()">Submit</button>
-
-    <div id="message"></div>
+        <div id="message"></div>
+    </div>
 
     <script>
         async function sendData() {
@@ -53,7 +61,7 @@
             const messageDiv = document.getElementById("message");
 
             if (!name || !email) {
-                messageDiv.textContent = "Please enter both name and email.";
+                messageDiv.textContent = "Both fields are required.";
                 messageDiv.style.color = "red";
                 return;
             }
@@ -82,4 +90,3 @@
 
 </body>
 </html>
-
