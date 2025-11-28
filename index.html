@@ -1,16 +1,85 @@
-<html>
- <head>
- <script src="fetch.js"></script>
- </head>
- <body>
- <h2>Welcome to HTW</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamoDB User Form</title>
 
- <p>enter a value</p>
- <input id="myvalue" type="text"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f7f7f7;
+        }
+        input, button {
+            padding: 10px;
+            margin: 8px 0;
+            width: 280px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        #message {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
 
- <p class="content"></p>
+<body>
 
- <button id="button">Submit</button>
+    <h2>Add User to DynamoDB</h2>
 
- </body>
+    <label>Name:</label><br>
+    <input type="text" id="name" placeholder="Enter your name"><br>
+
+    <label>Email:</label><br>
+    <input type="email" id="email" placeholder="Enter your email"><br>
+
+    <button onclick="sendData()">Submit</button>
+
+    <div id="message"></div>
+
+    <script>
+        async function sendData() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const messageDiv = document.getElementById("message");
+
+            if (!name || !email) {
+                messageDiv.textContent = "Please enter both name and email.";
+                messageDiv.style.color = "red";
+                return;
+            }
+
+            const apiUrl = "https://rrrorg9iri.execute-api.eu-west-1.amazonaws.com/default/aya-function";
+
+            try {
+                const response = await fetch(`${apiUrl}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`);
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.textContent = data.message || "User added successfully!";
+                    messageDiv.style.color = "green";
+                } else {
+                    messageDiv.textContent = data.error || "Something went wrong.";
+                    messageDiv.style.color = "red";
+                }
+
+            } catch (error) {
+                messageDiv.textContent = "Request failed: " + error;
+                messageDiv.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
 </html>
+
