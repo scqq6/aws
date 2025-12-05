@@ -5,7 +5,7 @@ window.onload = function () {
         if (!val.trim()) return;
 
         window.location.href =
-            'https://pr85y280l1.execute-api.eu-west-1.amazonaws.com/default/aya-function-sns2'
+            'https://pr85y280l1.execute-api.eu-west-1.amazonaws.com/default/aya-function-sns2?name='
             + encodeURIComponent(val);
 
     }, false);
