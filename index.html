@@ -60,8 +60,8 @@
             const email = document.getElementById("email").value.trim();
             const messageDiv = document.getElementById("message");
 
-            if (!name || !email) {
-                messageDiv.textContent = "Both fields are required.";
+            if (!name) {
+                messageDiv.textContent = "Name is required.";
                 messageDiv.style.color = "red";
                 return;
             }
@@ -69,20 +69,22 @@
             const apiUrl = "https://rrrorg9iri.execute-api.eu-west-1.amazonaws.com/default/aya-function";
 
             try {
-                const response = await fetch(`${apiUrl}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`);
+                const response = await fetch(
+                    `${apiUrl}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
+                );
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    messageDiv.textContent = data.message || "User added successfully!";
+                    messageDiv.textContent = data.message;
                     messageDiv.style.color = "green";
                 } else {
-                    messageDiv.textContent = data.error || "Something went wrong.";
+                    messageDiv.textContent = data.error;
                     messageDiv.style.color = "red";
                 }
 
             } catch (error) {
-                messageDiv.textContent = "Request failed: " + error;
+                messageDiv.textContent = "Error: " + error;
                 messageDiv.style.color = "red";
             }
         }
