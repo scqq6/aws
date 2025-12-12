@@ -1,0 +1,38 @@
+<html>
+    <head>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+
+                    document.querySelector('button').addEventListener('click', function() {
+                        const email = document.getElementById('email').value;
+                        const name = document.getElementById('name').value;
+                        const url = `https://c6ldanx8rl.execute-api.eu-west-1.amazonaws.com/default/reka-db-lamda?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+                        
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => console.log(data))
+                            .catch(error => console.error('Error:', error));
+                    });
+            });
+
+            </script>
+    </head>
+
+    <body>
+        Hello HTW
+
+        # add two input field s and a button
+        <form>
+            <input type="text" id="name" name="name" >
+            <input type="text" id="email" name="email" >
+            
+            <button type="button">Submit</button>
+        </form> 
+
+    </body>
+
+
+
+</html>
+
+
