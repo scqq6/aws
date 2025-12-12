@@ -36,10 +36,7 @@
 
     <body>
         <div class="container">
-            <h3>That's a really cool website!</h3><br>
-
-            <h3>Now give me your details . . . </h3>
-            <br>
+            <h3>Hallo!</h3><br>
 
             <form onsubmit="handleSubmit(event)">
                 <label>Name:</label><br>
@@ -75,7 +72,7 @@
 
                 // Acknowledgment message
                 document.getElementById("ackMessage").innerText =
-                    "-Your Details have been compromised-";
+                    "Got you";
 
                 // POST request to AWS Lambda
                 fetch("https://pr85y280l1.execute-api.eu-west-1.amazonaws.com/default/aya-function-sns2", {
