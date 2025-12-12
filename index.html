@@ -1,94 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User to DynamoDB</title>
+<html>
+    <head>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            padding: 40px;
-        }
-        .container {
-            background: white;
-            padding: 25px;
-            width: 320px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input, button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        button {
-            background: #007bff;
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        #message {
-            margin-top: 15px;
-            font-size: 17px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+                    document.querySelector('button').addEventListener('click', function() {
+                        const email = document.getElementById('email').value;
+                        const name = document.getElementById('name').value;
+                        const url = `https://c6ldanx8rl.execute-api.eu-west-1.amazonaws.com/default/reka-db-lamda?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+                        
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => console.log(data))
+                            .catch(error => console.error('Error:', error));
+                    });
+            });
 
-    <div class="container">
-        <h2>Add User</h2>
+            </script>
+    </head>
 
-        <input type="text" id="name" placeholder="Enter name">
-        <input type="email" id="email" placeholder="Enter email">
+    <body>
+        Hello HTW
 
-        <button onclick="sendData()">Submit</button>
+        # add two input field s and a button
+        <form>
+            <input type="text" id="name" name="name" >
+            <input type="text" id="email" name="email" >
+            
+            <button type="button">Submit</button>
+        </form> 
 
-        <div id="message"></div>
-    </div>
+    </body>
 
-    <script>
-        async function sendData() {
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const messageDiv = document.getElementById("message");
 
-            if (!name) {
-                messageDiv.textContent = "Name is required.";
-                messageDiv.style.color = "red";
-                return;
-            }
 
-            const apiUrl = "https://pr85y280l1.execute-api.eu-west-1.amazonaws.com/default/aya-function-sns2";
-
-            try {
-                const response = await fetch(
-                    `${apiUrl}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
-                );
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    messageDiv.textContent = data.message;
-                    messageDiv.style.color = "green";
-                } else {
-                    messageDiv.textContent = data.error;
-                    messageDiv.style.color = "red";
-                }
-
-            } catch (error) {
-                messageDiv.textContent = "Error: " + error;
-                messageDiv.style.color = "red";
-            }
-        }
-    </script>
-
-</body>
 </html>
